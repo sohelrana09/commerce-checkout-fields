@@ -1,0 +1,20 @@
+[
+  {
+    "default": true,
+    "label": "Show checkout fields on the storefront",
+    "name": "fieldsEnabled",
+    "type": "boolean"
+  },
+  {
+    "default": true,
+    "label": "Block orders whose checkout field values are missing or invalid",
+    "name": "blockInvalidOrders",
+    "type": "boolean"
+  },
+  {
+    "default": "300",
+    "label": "Seconds browsers and the CDN may cache the field definitions (0 to 86400)",
+    "name": "cacheSeconds",
+    "type": "text"
+  }
+]

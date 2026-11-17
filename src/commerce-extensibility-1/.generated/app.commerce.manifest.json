@@ -1,0 +1,111 @@
+{
+  "adminUi": {
+    "menu": {
+      "aclProtected": true,
+      "description": "Create and manage the extra fields shoppers fill in at checkout.",
+      "id": "checkout_fields",
+      "label": "Checkout Fields"
+    },
+    "order": {
+      "gridColumns": {
+        "columns": [
+          {
+            "align": "left",
+            "id": "checkout_fields",
+            "label": "Checkout fields",
+            "type": "string"
+          }
+        ],
+        "description": "Shows the checkout field values saved on each order in the order grid.",
+        "label": "Checkout fields",
+        "runtimeAction": "checkout-fields/order-grid"
+      },
+      "viewButtons": [
+        {
+          "description": "Opens the checkout field values the shopper entered for this order.",
+          "id": "checkout_fields",
+          "label": "Checkout Fields",
+          "path": "#/order",
+          "sortOrder": 100,
+          "type": "view"
+        }
+      ]
+    }
+  },
+  "businessConfig": {
+    "schema": [
+      {
+        "default": true,
+        "label": "Show checkout fields on the storefront",
+        "name": "fieldsEnabled",
+        "type": "boolean"
+      },
+      {
+        "default": true,
+        "label": "Block orders whose checkout field values are missing or invalid",
+        "name": "blockInvalidOrders",
+        "type": "boolean"
+      },
+      {
+        "default": "300",
+        "label": "Seconds browsers and the CDN may cache the field definitions (0 to 86400)",
+        "name": "cacheSeconds",
+        "type": "text"
+      }
+    ]
+  },
+  "installation": {
+    "customInstallationSteps": [
+      {
+        "description": "Provision App Builder Database Storage and create the collection for checkout field definitions.",
+        "name": "Set up database",
+        "script": "./scripts/setup-database.js"
+      }
+    ],
+    "messages": {
+      "postInstallation": "Checkout Fields is installed. Open Checkout Fields in the Commerce Admin to add your first field, then add the storefront kit to your Edge Delivery Services checkout. New fields are off until you switch them on.",
+      "preInstallation": "Checkout Fields stores field definitions in App Builder Database Storage. Make sure App Builder Data Services is added to your workspace."
+    }
+  },
+  "metadata": {
+    "description": "Add your own fields to checkout: PO number, delivery notes, VAT ID, gift message or a select. Values are validated on place order and saved on the order as custom attributes.",
+    "displayName": "Checkout Fields",
+    "id": "checkout-fields",
+    "upgradeMode": "manual",
+    "version": "0.1.0"
+  },
+  "webhooks": [
+    {
+      "category": "validation",
+      "description": "Checks the checkout field values on every order before Commerce saves it: required fields, formats, options and dates.",
+      "label": "Validate checkout fields",
+      "requireAdobeAuth": true,
+      "runtimeAction": "checkout-fields/validate-order",
+      "webhook": {
+        "batch_name": "checkout_fields",
+        "fallback_error_message": "We couldn't check your checkout details. Please try again.",
+        "fields": [
+          {
+            "name": "order.custom_attributes_serializable"
+          },
+          {
+            "name": "order.store_id"
+          },
+          {
+            "name": "order.customer_group_id"
+          },
+          {
+            "name": "order.increment_id"
+          }
+        ],
+        "hook_name": "validate_checkout_fields",
+        "method": "POST",
+        "required": true,
+        "soft_timeout": 1000,
+        "timeout": 5000,
+        "webhook_method": "observer.sales_order_place_before",
+        "webhook_type": "before"
+      }
+    }
+  ]
+}
