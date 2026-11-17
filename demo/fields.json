@@ -1,0 +1,196 @@
+{
+  "enabled": true,
+  "fields": [
+    {
+      "code": "po_number",
+      "enabled": true,
+      "help": "Your company's purchase order reference.",
+      "label": "PO number",
+      "placement": "review",
+      "placeholder": "PO-12345",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 10,
+      "type": "text",
+      "validation": {
+        "maxLength": 30,
+        "pattern": "[A-Za-z0-9-]+",
+        "patternMessage": "Use letters, digits and dashes only."
+      }
+    },
+    {
+      "code": "delivery_notes",
+      "enabled": true,
+      "help": "Anything the driver should know: gate code, where to leave the parcel.",
+      "label": "Delivery notes",
+      "placement": "shipping",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 10,
+      "type": "textarea",
+      "validation": {
+        "maxLength": 250
+      }
+    },
+    {
+      "code": "vat_id",
+      "enabled": true,
+      "help": "EU VAT number, starting with the country code.",
+      "label": "VAT ID",
+      "placement": "payment",
+      "placeholder": "DE123456789",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 10,
+      "type": "text",
+      "validation": {
+        "maxLength": 14,
+        "minLength": 4,
+        "pattern": "[A-Z]{2}[A-Z0-9]{2,12}",
+        "patternMessage": "Enter the VAT ID with its country code, for example DE123456789."
+      }
+    },
+    {
+      "code": "is_gift",
+      "enabled": true,
+      "label": "This order is a gift",
+      "placement": "review",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 20,
+      "type": "checkbox"
+    },
+    {
+      "code": "gift_message",
+      "conditions": [
+        {
+          "field": "is_gift",
+          "operator": "checked"
+        }
+      ],
+      "enabled": true,
+      "label": "Gift message",
+      "match": "all",
+      "placement": "review",
+      "required": true,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 30,
+      "type": "textarea",
+      "validation": {
+        "maxLength": 200
+      }
+    },
+    {
+      "code": "heard_from",
+      "enabled": true,
+      "label": "How did you hear about us?",
+      "options": [
+        {
+          "label": "Search engine",
+          "value": "search"
+        },
+        {
+          "label": "Social media",
+          "value": "social"
+        },
+        {
+          "label": "A friend",
+          "value": "friend"
+        },
+        {
+          "label": "Something else",
+          "value": "other"
+        }
+      ],
+      "placement": "review",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": false,
+      "sortOrder": 40,
+      "type": "select"
+    },
+    {
+      "code": "delivery_date",
+      "enabled": true,
+      "help": "We deliver from two days after your order.",
+      "label": "Preferred delivery date",
+      "placement": "shipping",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 20,
+      "type": "date",
+      "validation": {
+        "maxDate": "today+60",
+        "minDate": "today+2"
+      }
+    },
+    {
+      "code": "trade_account",
+      "enabled": true,
+      "help": "Shown to the Wholesale group only.",
+      "label": "Trade account number",
+      "placement": "payment",
+      "required": true,
+      "scope": {
+        "customerGroups": [
+          "2"
+        ],
+        "storeViews": []
+      },
+      "showInEmail": true,
+      "sortOrder": 20,
+      "type": "text",
+      "validation": {
+        "pattern": "TA-[0-9]{4,8}",
+        "patternMessage": "Use TA- followed by 4 to 8 digits."
+      }
+    },
+    {
+      "code": "leitweg_id",
+      "enabled": true,
+      "help": "German public-sector buyers only (store view de).",
+      "label": "Leitweg-ID",
+      "placement": "payment",
+      "required": false,
+      "scope": {
+        "customerGroups": [],
+        "storeViews": [
+          "de"
+        ]
+      },
+      "showInEmail": true,
+      "sortOrder": 30,
+      "type": "text",
+      "validation": {
+        "maxLength": 46
+      }
+    }
+  ]
+}

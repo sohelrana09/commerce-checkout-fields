@@ -1,8 +1,8 @@
-// Serves the Admin page with an in-browser backend at http://localhost:4320 (npm run admin:preview).
+// Serves the Admin page with an in-browser backend at http://localhost:4350 (npm run admin:preview).
 // It uses its own browser target, so it doesn't change how `aio app build` bundles the real page.
 import { Parcel } from "@parcel/core";
 
-const port = Number(process.env.PORT) || 4320;
+const port = Number(process.env.PORT) || 4350;
 
 const bundler = new Parcel({
   defaultConfig: "@parcel/config-default",

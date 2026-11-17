@@ -1,5 +1,5 @@
 name: Bug report
-description: A label, the Admin page, the storefront kit or the installation doesn't work as described.
+description: A checkout field, the order check, the Admin page, the storefront kit or the installation doesn't work as described.
 labels: [ bug ]
 body:
   - type: markdown
@@ -18,10 +18,10 @@ body:
     id: steps
     attributes:
       label: Steps to reproduce
-      description: Include the label rule (JSON from the Admin or LABEL_RULES) and the product (SKU, prices, stock, attributes).
+      description: Include the field definition (JSON from the Admin or CHECKOUT_FIELDS), the store view and customer group, and the values entered.
       placeholder: |
-        1. Create a label with ...
-        2. Open the product list or product page for ...
+        1. Create a field with ...
+        2. At checkout, as a guest on store view ..., enter ...
         3. ...
     validations:
       required: true
@@ -30,9 +30,11 @@ body:
     attributes:
       label: Area
       options:
-        - Label rules (which products get which labels)
+        - Field validation or visibility
+        - Place-order check (webhook)
+        - Values on the order (grid column, order view)
         - Admin page
-        - Storefront kit or rules feed
+        - Storefront kit or fields feed
         - Installation or App Management
         - Other
     validations:
@@ -49,11 +51,11 @@ body:
   - type: input
     id: version
     attributes:
-      label: Product Labels version or commit
-      placeholder: v0.1.0 or 2be2493
+      label: Checkout Fields version or commit
+      placeholder: v0.1.0 or 47ede00
   - type: textarea
     id: logs
     attributes:
       label: Logs or screenshots
-      description: Output of `aio app logs`, browser console errors or a screenshot. Remove any secrets first.
+      description: Output of `aio app logs`, browser console errors or a screenshot. Remove any secrets and customer data first.
       render: text
